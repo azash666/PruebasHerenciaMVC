@@ -9,15 +9,20 @@ public class movimiento : NetworkBehaviour
 	public GameObject torreta;
 	public Vector3 vel;
 
-
+	[SyncVar]
 	private float anterior;
+	[SyncVar]
 	private float tiempo;
+	[SyncVar]
+	private float tiempoAnterior;
 	private float tiempodisparo;
 
 	public GameObject bala;
 	public GameObject huecoBala;
 
 	[SyncVar]
+	private float rotacionVertical;
+
 	private float velocidadAngular;
 
 	[SyncVar/*(hook = "cambiar")*/]
@@ -38,14 +43,19 @@ public class movimiento : NetworkBehaviour
 	{
 		
 		if (!isLocalPlayer) {
+			if (!isServer) {
+				velocidadAngular = (rotacion - anterior) / tiempo;
+			}
 			rotacion += velocidadAngular * Time.deltaTime;
 			torreta.transform.rotation = Quaternion.Euler (0, rotacion, 0);
+			huecoBala.transform.Rotate (rotacionVertical, 0, 0);
 		}
 		else {
 			var x = Input.GetAxis ("Horizontal") * Time.deltaTime * 60.0f;
 			var z = Input.GetAxis ("Vertical") * 50f;
 			var rotacionTorreta = Input.GetAxis ("Mouse X") * Time.deltaTime * 60f;
-			var rotacionVertical = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
+			rotacionVertical = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
+			CmdCambiarVertical (rotacionVertical);
 
 			transform.Rotate (0, x, 0);
 			torreta.transform.Rotate (0, rotacionTorreta, 0);
@@ -79,10 +89,14 @@ public class movimiento : NetworkBehaviour
 	void CmdCambiar(float rot){
 		anterior = rotacion;
 		rotacion = rot;
+		tiempoAnterior = tiempo;
 		tiempo = Time.time;
 		velocidadAngular = (rotacion - anterior) / tiempo;
 	}
 
-
+	[Command]
+	void CmdCambiarVertical(float vert){
+		rotacionVertical = vert;
+	}
 
 }
