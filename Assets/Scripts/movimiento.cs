@@ -44,7 +44,7 @@ public class movimiento : NetworkBehaviour
 		
 		if (!isLocalPlayer) {
 			if (!isServer) {
-				velocidadAngular = (rotacion - anterior) / tiempo;
+				velocidadAngular = (rotacion - anterior) / (tiempo-tiempoAnterior);
 			}
 			rotacion += velocidadAngular * Time.deltaTime;
 			torreta.transform.rotation = Quaternion.Euler (0, rotacion, 0);
