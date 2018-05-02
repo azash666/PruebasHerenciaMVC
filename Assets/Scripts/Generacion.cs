@@ -45,6 +45,7 @@ public class Generacion : NetworkBehaviour {
 
 	void Start(){
 		tiempo = Time.time + 300f;
+		Cursor.visible = false;
 		Generate ();
 	}
 

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class hit : MonoBehaviour {
+public class hit : NetworkBehaviour {
 	public GameObject creador;
 	void OnCollisionEnter(Collision colision){
 		GameObject hit = colision.gameObject;
@@ -13,8 +14,8 @@ public class hit : MonoBehaviour {
 					vida.recibirDanno (20);
 				}
 			}
-
-			Destroy (gameObject);
+			if(isServer)
+				Destroy (gameObject);
 		}
 	}
 }

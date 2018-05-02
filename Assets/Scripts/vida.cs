@@ -31,31 +31,31 @@ public class vida : NetworkBehaviour
 
 	void OnCollisionEnter(Collision colision){
 		GameObject hit = colision.gameObject;
-		if (hit.tag == "Player") {
-			Debug.Log ("Entrado");
-			var vidaa = hit.GetComponent<vida> ();
-			if (vidaa != null && velocidad >= 3f && !hitt) {
-				vidaa.recibirDanno (50);
-				hitt = true;
-				anterior = Time.time;
+		if(isServer)
+			if (hit.tag == "Player") {
+				var vidaa = hit.GetComponent<vida> ();
+				if (vidaa != null && velocidad >= 3f && !hitt) {
+					vidaa.recibirDanno (50);
+					hitt = true;
+					anterior = Time.time;
+				}
+			}else{
+				if (/*rb.velocity.magnitude >= 4f && */hit.tag != "Suelo" && hit.tag != "Bala" && !hitt) {
+					int valor = (int) (velocidad-2)*5;
+					hitt = true;
+					anterior = Time.time;
+					if (valor>0)
+						recibirDanno (valor);
+				}
 			}
-		}else{
-			if (/*rb.velocity.magnitude >= 4f && */hit.tag != "Suelo" && hit.tag != "Bala" && !hitt) {
-				int valor = (int) (velocidad-2)*5;
-				hitt = true;
-				anterior = Time.time;
-				if (valor>0)
-					recibirDanno (valor);
-			}
-		}
 	}
 
 	public void recibirDanno(int danno){
 		if (isServer) {
-			vidaActual -= danno;
+			CmdQuitarvida(danno);
 			if (vidaActual <= 0) {
-				vidaActual = vidaMaxima;
 				RpcRespawn ();
+				vidaActual = vidaMaxima;
 			}
 		}
 	}
@@ -66,6 +66,11 @@ public class vida : NetworkBehaviour
 			transform.position = Vector3.zero;
 
 		}
+	}
+
+	[Command]
+	void CmdQuitarvida(int valor){
+		vidaActual -= valor;
 	}
 
 }

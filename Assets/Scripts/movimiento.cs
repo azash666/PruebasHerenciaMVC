@@ -63,14 +63,14 @@ public class movimiento : NetworkBehaviour
 				huecoCamara.transform.rotation = Quaternion.Euler (340f, auxy, 0);
 				huecoBala.transform.rotation = Quaternion.Euler (340f, auxy, 0);
 			} else {
-				if (aux2 > 10f && aux2<180f) {
+				if (aux2 > 20f && aux2<180f) {
 					rotacionVertical = 0;
-					huecoCamara.transform.rotation = Quaternion.Euler (10f, auxy, 0);
-					huecoBala.transform.rotation = Quaternion.Euler (10f, auxy, 0);
+					huecoCamara.transform.rotation = Quaternion.Euler (20f, auxy, 0);
+					huecoBala.transform.rotation = Quaternion.Euler (20f, auxy, 0);
 				} else {
 					rotacionVertical = aux;
 					CmdCambiarVertical (rotacionVertical);
-					if ((aux2 < 345f && aux2 > 180f && aux > 0) || (aux2 > 5f && aux2 < 180f && aux < 0) || aux2 >= 342f || aux2 <= 8f) {
+					if ((aux2 < 345f && aux2 > 180f && aux > 0) || (aux2 > 15f && aux2 < 180f && aux < 0) || aux2 >= 345f || aux2 <= 15f) {
 						huecoCamara.transform.Rotate (aux, 0, 0);
 						huecoBala.transform.Rotate (aux, 0, 0);
 					}
