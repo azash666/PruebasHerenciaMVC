@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class Generacion : NetworkBehaviour {
 	public GameObject[] terreno;
-
 	public GameObject[] valla;
 	private float tiempo;
 	private int[] tipo;
@@ -28,6 +27,7 @@ public class Generacion : NetworkBehaviour {
 				                    (float)((i / 3) * 50)
 			                    ), Quaternion.identity);
 			objeto.transform.Rotate (0f, rotacion [i] * 45f, 0f);
+
 			todo[i] = objeto;
 			NetworkServer.Spawn (objeto);
 		}
