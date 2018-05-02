@@ -48,7 +48,8 @@ public class movimiento : NetworkBehaviour
 			}
 			rotacion += velocidadAngular * Time.deltaTime;
 			torreta.transform.rotation = Quaternion.Euler (0, rotacion, 0);
-			huecoBala.transform.Rotate (rotacionVertical, 0, 0);
+			float auxy = huecoCamara.transform.rotation.eulerAngles.y;
+			huecoBala.transform.rotation = Quaternion.Euler (rotacionVertical, auxy, 0);
 		}
 		else {
 			var x = Input.GetAxis ("Horizontal") * Time.deltaTime * 60.0f;
@@ -69,14 +70,14 @@ public class movimiento : NetworkBehaviour
 					huecoBala.transform.rotation = Quaternion.Euler (20f, auxy, 0);
 				} else {
 					rotacionVertical = aux;
-					CmdCambiarVertical (rotacionVertical);
 					if ((aux2 < 345f && aux2 > 180f && aux > 0) || (aux2 > 15f && aux2 < 180f && aux < 0) || aux2 >= 345f || aux2 <= 15f) {
 						huecoCamara.transform.Rotate (aux, 0, 0);
 						huecoBala.transform.Rotate (aux, 0, 0);
 					}
 				}
 			}
-
+			float inclinacionBalas = huecoBala.transform.rotation.eulerAngles.x;
+			CmdCambiarVertical (inclinacionBalas);
 			transform.Rotate (0, x, 0);
 			torreta.transform.Rotate (0, rotacionTorreta, 0);
 			rotacion = torreta.transform.rotation.eulerAngles.y;
@@ -96,7 +97,7 @@ public class movimiento : NetworkBehaviour
 	[Command]
 	void CmdFire(){
 		GameObject bullet = Instantiate (bala, huecoBala.transform.position, huecoBala.transform.rotation);
-		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 30;
+		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 80;
 		Destroy(bullet, 2f);
 		bullet.GetComponent<hit> ().creador = gameObject;
 		NetworkServer.Spawn (bullet);

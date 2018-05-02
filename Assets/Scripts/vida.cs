@@ -21,12 +21,13 @@ public class vida : NetworkBehaviour
 	}
 
 	void FixedUpdate(){
-		transform.localScale = new Vector3 (0.3f+vidaActual/200f, 0.3f+vidaActual/200f, 0.3f+vidaActual/200f);
+		transform.localScale = new Vector3 (0.4f+vidaActual/350f, 0.4f+vidaActual/350f, 0.4f+vidaActual/350f);
 		if (hitt) {
 			if (anterior+0.8<=Time.time)
 				hitt = false;
 		}
-		velocidad = rb.velocity.magnitude;
+		float aux = rb.velocity.magnitude;
+		CmdVelocidad (aux);
 	}
 
 	void OnCollisionEnter(Collision colision){
@@ -44,8 +45,8 @@ public class vida : NetworkBehaviour
 					int valor = (int) (velocidad-2)*5;
 					hitt = true;
 					anterior = Time.time;
-					if (valor>0)
-						recibirDanno (valor);
+					//if (valor>0)
+						recibirDanno (5);
 				}
 			}
 	}
@@ -71,6 +72,10 @@ public class vida : NetworkBehaviour
 	[Command]
 	void CmdQuitarvida(int valor){
 		vidaActual -= valor;
+	}
+
+	void CmdVelocidad(float vel){
+		velocidad = vel;
 	}
 
 }
