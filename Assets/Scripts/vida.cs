@@ -51,9 +51,21 @@ public class vida : NetworkBehaviour
 	}
 
 	public void recibirDanno(int danno){
-		if(isServer)
+		if (isServer) {
 			vidaActual -= danno;
+			if (vidaActual <= 0) {
+				vidaActual = vidaMaxima;
+				RpcRespawn ();
+			}
+		}
 	}
 
+	[ClientRpc]
+	void RpcRespawn(){
+		if(isLocalPlayer){
+			transform.position = Vector3.zero;
+
+		}
+	}
 
 }
