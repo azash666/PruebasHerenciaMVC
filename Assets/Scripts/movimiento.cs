@@ -54,13 +54,31 @@ public class movimiento : NetworkBehaviour
 			var x = Input.GetAxis ("Horizontal") * Time.deltaTime * 60.0f;
 			var z = Input.GetAxis ("Vertical") * 50f;
 			var rotacionTorreta = Input.GetAxis ("Mouse X") * Time.deltaTime * 60f;
-			rotacionVertical = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
-			CmdCambiarVertical (rotacionVertical);
+			float aux = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
+			float aux2 = huecoCamara.transform.rotation.eulerAngles.x;
+			float auxy = huecoCamara.transform.rotation.eulerAngles.y;
+			Debug.Log (aux2);
+			if (aux2 < 340f && aux2 >= 180f) {
+				rotacionVertical = 0;
+				huecoCamara.transform.rotation = Quaternion.Euler (340f, auxy, 0);
+				huecoBala.transform.rotation = Quaternion.Euler (340f, auxy, 0);
+			} else {
+				if (aux2 > 10f && aux2<180f) {
+					rotacionVertical = 0;
+					huecoCamara.transform.rotation = Quaternion.Euler (10f, auxy, 0);
+					huecoBala.transform.rotation = Quaternion.Euler (10f, auxy, 0);
+				} else {
+					rotacionVertical = aux;
+					CmdCambiarVertical (rotacionVertical);
+					if ((aux2 < 345f && aux2 > 180f && aux > 0) || (aux2 > 5f && aux2 < 180f && aux < 0) || aux2 >= 342f || aux2 <= 8f) {
+						huecoCamara.transform.Rotate (aux, 0, 0);
+						huecoBala.transform.Rotate (aux, 0, 0);
+					}
+				}
+			}
 
 			transform.Rotate (0, x, 0);
 			torreta.transform.Rotate (0, rotacionTorreta, 0);
-			huecoBala.transform.Rotate (rotacionVertical, 0, 0);
-			huecoCamara.transform.Rotate (rotacionVertical, 0, 0);
 			rotacion = torreta.transform.rotation.eulerAngles.y;
 			CmdCambiar(rotacion);
 			//CmdVelocidad (rb.velocity);
@@ -78,7 +96,7 @@ public class movimiento : NetworkBehaviour
 	[Command]
 	void CmdFire(){
 		GameObject bullet = Instantiate (bala, huecoBala.transform.position, huecoBala.transform.rotation);
-		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 60;
+		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 30;
 		Destroy(bullet, 2f);
 		bullet.GetComponent<hit> ().creador = gameObject;
 		NetworkServer.Spawn (bullet);
