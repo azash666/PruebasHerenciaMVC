@@ -485,7 +485,7 @@ MonoBehaviour:
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
   m_InterpolateRotation: 5
-  m_InterpolateMovement: 2
+  m_InterpolateMovement: 5
 --- !u!114 &114524513681313474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -552,3 +552,4 @@ MonoBehaviour:
   anterior: 0
   velocidad: 0
   vidaActual: 100
+  spawns: []

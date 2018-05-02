@@ -34,7 +34,7 @@ public class movimiento : NetworkBehaviour
 	void Start()
 	{
 		if(isLocalPlayer)
-			Instantiate (camara, huecoCamara.transform.position, huecoCamara.transform.localRotation).transform.parent=huecoCamara.transform;
+			Instantiate (camara, huecoCamara.transform.position, huecoCamara.transform.rotation).transform.parent=huecoCamara.transform;
 		tiempodisparo = 0;
 		rb = GetComponent<Rigidbody>();
 	}

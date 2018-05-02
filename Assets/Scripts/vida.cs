@@ -12,12 +12,14 @@ public class vida : NetworkBehaviour
 	[SyncVar]
 	public float vidaActual;
 
+	public NetworkStartPosition[] spawns;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody> ();
 		vidaActual = vidaMaxima;
 		hitt = false;
+		spawns = FindObjectsOfType<NetworkStartPosition> ();
 	}
 
 	void FixedUpdate(){
@@ -64,8 +66,15 @@ public class vida : NetworkBehaviour
 	[ClientRpc]
 	void RpcRespawn(){
 		if(isLocalPlayer){
-			transform.position = Vector3.zero;
-
+			Vector3 PInicial = Vector3.zero;
+			Quaternion RInicial = Quaternion.Euler(0,0,0);
+			if(spawns !=null && spawns.Length>0){
+				int value = Random.Range (0, spawns.Length);
+				PInicial = spawns [value].transform.position;
+				RInicial = spawns [value].transform.rotation;
+			}
+			transform.position = PInicial;
+			transform.rotation = RInicial;
 		}
 	}
 
