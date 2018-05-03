@@ -6,12 +6,12 @@ public class vida : NetworkBehaviour
 	Rigidbody rb;
 	public bool hitt;
 	public GameObject golpeador;
-	public GameObject generador;
 	public float vidaMaxima;
 	public float anterior;
 	public float velocidad;
 	[SyncVar]
 	public float vidaActual;
+	public NetworkStartPosition[] spawns;
 
 
 	void Start()
@@ -19,7 +19,7 @@ public class vida : NetworkBehaviour
 		rb = GetComponent<Rigidbody> ();
 		vidaActual = vidaMaxima;
 		hitt = false;
-		generador.GetComponent<Generacion> ().players.Add (this);
+		//generador.GetComponent<Generacion> ().players.Add (this);
 	}
 
 	void FixedUpdate(){
@@ -71,7 +71,7 @@ public class vida : NetworkBehaviour
 		if(isLocalPlayer){
 			Vector3 PInicial = Vector3.zero;
 			Quaternion RInicial = Quaternion.Euler(0,0,0);
-			NetworkStartPosition[] spawns = generador.GetComponent<Generacion> ().spawns;
+			spawns = FindObjectsOfType<NetworkStartPosition> ();
 			if(spawns !=null && spawns.Length>0){
 				int value = Random.Range (0, spawns.Length);
 				PInicial = spawns [value].transform.position;

@@ -17,7 +17,7 @@ public class movimiento : NetworkBehaviour
 	private float tiempoAnterior;
 	private float tiempodisparo;
 
-	public GameObject bala;
+
 	public GameObject huecoBala;
 	private float fuerza;
 	public float fuerzaAngular;
@@ -34,11 +34,10 @@ public class movimiento : NetworkBehaviour
 
 	void Start()
 	{
-		Cursor.visible = false;
+		//Cursor.visible = false;
 		fuerza = 10000f;
 		if(isLocalPlayer)
 			Instantiate (camara, huecoCamara.transform.position, huecoCamara.transform.rotation).transform.parent=huecoCamara.transform;
-		tiempodisparo = 0;
 		rb = GetComponent<Rigidbody>();
 	}
 
@@ -55,13 +54,12 @@ public class movimiento : NetworkBehaviour
 			huecoBala.transform.rotation = Quaternion.Euler (rotacionVertical, auxy, 0);
 		}
 		else {
-			var x = Input.GetAxis ("Horizontal") * Time.deltaTime * fuerzaAngular;
+			var x = Input.GetAxis ("Horizontal") * Time.deltaTime *60f;
 			var z = Input.GetAxis ("Vertical") *Time.deltaTime * fuerza;
 			var rotacionTorreta = Input.GetAxis ("Mouse X") * Time.deltaTime * 60f;
 			float aux = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
 			float aux2 = huecoCamara.transform.rotation.eulerAngles.x;
 			float auxy = huecoCamara.transform.rotation.eulerAngles.y;
-		
 			if (aux2 < 340f && aux2 >= 180f) {
 				rotacionVertical = 0;
 				huecoCamara.transform.rotation = Quaternion.Euler (340f, auxy, 0);
@@ -81,31 +79,19 @@ public class movimiento : NetworkBehaviour
 			}
 			float inclinacionBalas = huecoBala.transform.rotation.eulerAngles.x;
 			CmdCambiarVertical (inclinacionBalas);
-			rb.AddTorque (0, x, 0);
-			//transform.Rotate (0, x, 0);
+			Debug.Log (x);
+			//rb.AddTorque (0, x, 0);
+			transform.Rotate (0, x, 0);
 			torreta.transform.Rotate (0, rotacionTorreta, 0);
 			rotacion = torreta.transform.rotation.eulerAngles.y;
 			CmdCambiar(rotacion);
 			//CmdVelocidad (rb.velocity);
 			if (rb.velocity.magnitude <= 10)
 				rb.AddForce (transform.forward * z);
-			if (Input.GetKey(KeyCode.Mouse0)){
-				if (tiempodisparo + .5f < Time.time) {
-					CmdFire ();
-					tiempodisparo = Time.time;
-				}
-			}
+			
 		}
 	}
 
-	[Command]
-	void CmdFire(){
-		GameObject bullet = Instantiate (bala, huecoBala.transform.position, huecoBala.transform.rotation);
-		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 80;
-		Destroy(bullet, 2f);
-		bullet.GetComponent<hit> ().creador = gameObject;
-		NetworkServer.Spawn (bullet);
-	}
 
 
 	[Command]

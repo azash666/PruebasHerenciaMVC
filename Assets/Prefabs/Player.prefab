@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 114946691691903344}
   - component: {fileID: 65762319179959794}
   - component: {fileID: 114466475197183456}
+  - component: {fileID: 114736921006227650}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -434,7 +435,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1899170160058200}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 5
   m_Drag: 2
   m_AngularDrag: 7
   m_UseGravity: 1
@@ -531,6 +532,19 @@ MonoBehaviour:
     i15: 96
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114736921006227650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1899170160058200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d79f99727fbace4e9a2ae53a73754c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bala: {fileID: 1302617320618922, guid: f607f53462587e94c9d32f7debfb0e83, type: 2}
+  huecoBala: {fileID: 1481612553244400}
 --- !u!114 &114876820191157502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,7 +560,6 @@ MonoBehaviour:
   huecoCamara: {fileID: 1589125022709890}
   torreta: {fileID: 1903854931707352}
   vel: {x: 0, y: 0, z: 0}
-  bala: {fileID: 1302617320618922, guid: f607f53462587e94c9d32f7debfb0e83, type: 2}
   huecoBala: {fileID: 1481612553244400}
   fuerzaAngular: 1000
   rotacion: 0
@@ -563,8 +576,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitt: 0
   golpeador: {fileID: 0}
-  generador: {fileID: 0}
   vidaMaxima: 100
   anterior: 0
   velocidad: 0
   vidaActual: 100
+  spawns: []

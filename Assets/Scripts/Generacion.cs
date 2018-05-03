@@ -6,8 +6,7 @@ using UnityEngine.Networking;
 public class Generacion : NetworkBehaviour {
 	public GameObject[] terreno;
 	public GameObject[] valla;
-	public NetworkStartPosition[] spawns;
-	public ArrayList players;
+	public GameObject[] players;
 	private float tiempo;
 	private int[] tipo;
 	private int[] rotacion;
@@ -15,7 +14,6 @@ public class Generacion : NetworkBehaviour {
 	// Use this for initialization
 
 	void Generate () {
-		players = new ArrayList ();
 		todo = new GameObject[39];
 		tipo = new int[9];
 		rotacion = new int[9];
@@ -50,8 +48,7 @@ public class Generacion : NetworkBehaviour {
 		for(int i=0; i<todo.Length; i++)
 			Destroy (todo [i]);
 		Generate ();
-		spawns = FindObjectsOfType<NetworkStartPosition> ();
-
+		players = GameObject.FindGameObjectsWithTag ("Player");
 		foreach(GameObject i in players){
 			i.GetComponent<vida> ().respawn ();
 		}
@@ -59,7 +56,7 @@ public class Generacion : NetworkBehaviour {
 
 
 	void Start(){
-		tiempo = Time.time + 5f;
+		tiempo = Time.time + 300f;
 		Generate ();
 	}
 
@@ -67,7 +64,7 @@ public class Generacion : NetworkBehaviour {
 	void Update () {
 		if (tiempo <= Time.time) {
 			restart ();
-			tiempo = Time.time + 1f;
+			tiempo = Time.time + 300f;
 
 		}
 	}

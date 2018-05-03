@@ -100,6 +100,7 @@
      <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+     <Compile Include="Assets\Scripts\disparo.cs" />
      <Compile Include="Assets\Scripts\Generacion.cs" />
      <Compile Include="Assets\Scripts\hit.cs" />
      <Compile Include="Assets\Scripts\movimiento.cs" />
