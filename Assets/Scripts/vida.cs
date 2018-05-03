@@ -5,21 +5,21 @@ public class vida : NetworkBehaviour
 {
 	Rigidbody rb;
 	public bool hitt;
-
+	public GameObject golpeador;
+	public GameObject generador;
 	public float vidaMaxima;
 	public float anterior;
 	public float velocidad;
 	[SyncVar]
 	public float vidaActual;
 
-	public NetworkStartPosition[] spawns;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody> ();
 		vidaActual = vidaMaxima;
 		hitt = false;
-		spawns = FindObjectsOfType<NetworkStartPosition> ();
+		generador.GetComponent<Generacion> ().players.Add (this);
 	}
 
 	void FixedUpdate(){
@@ -38,6 +38,7 @@ public class vida : NetworkBehaviour
 			if (hit.tag == "Player") {
 				var vidaa = hit.GetComponent<vida> ();
 				if (vidaa != null && velocidad >= 3f && !hitt) {
+				vidaa.golpeador = gameObject;
 					vidaa.recibirDanno (50);
 					hitt = true;
 					anterior = Time.time;
@@ -47,8 +48,8 @@ public class vida : NetworkBehaviour
 					int valor = (int) (velocidad-2)*5;
 					hitt = true;
 					anterior = Time.time;
-					//if (valor>0)
-						recibirDanno (5);
+					golpeador = null;
+					recibirDanno (5);
 				}
 			}
 	}
@@ -57,8 +58,10 @@ public class vida : NetworkBehaviour
 		if (isServer) {
 			CmdQuitarvida(danno);
 			if (vidaActual <= 0) {
-				RpcRespawn ();
-				vidaActual = vidaMaxima;
+				if (golpeador!=null)
+					golpeador.GetComponent<puntuacion> ().sumapuntos (50);
+				this.GetComponent<puntuacion> ().sumapuntos (-10);
+				respawn ();
 			}
 		}
 	}
@@ -68,6 +71,7 @@ public class vida : NetworkBehaviour
 		if(isLocalPlayer){
 			Vector3 PInicial = Vector3.zero;
 			Quaternion RInicial = Quaternion.Euler(0,0,0);
+			NetworkStartPosition[] spawns = generador.GetComponent<Generacion> ().spawns;
 			if(spawns !=null && spawns.Length>0){
 				int value = Random.Range (0, spawns.Length);
 				PInicial = spawns [value].transform.position;
@@ -85,6 +89,11 @@ public class vida : NetworkBehaviour
 
 	void CmdVelocidad(float vel){
 		velocidad = vel;
+	}
+
+	public void respawn(){
+		RpcRespawn ();
+		vidaActual = vidaMaxima;
 	}
 
 }

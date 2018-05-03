@@ -103,6 +103,7 @@
      <Compile Include="Assets\Scripts\Generacion.cs" />
      <Compile Include="Assets\Scripts\hit.cs" />
      <Compile Include="Assets\Scripts\movimiento.cs" />
+     <Compile Include="Assets\Scripts\puntuacion.cs" />
      <Compile Include="Assets\Scripts\vida.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\Paquetes descargados\Fantasy Skybox FREE\Readme.txt" />

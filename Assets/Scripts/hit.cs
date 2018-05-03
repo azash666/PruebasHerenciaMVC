@@ -11,7 +11,10 @@ public class hit : NetworkBehaviour {
 			if (hit.tag == "Player") {
 				var vida = hit.GetComponent<vida> ();
 				if (vida != null) {
+					vida.golpeador = creador;
 					vida.recibirDanno (20);
+					creador.GetComponent<puntuacion> ().sumapuntos (2);
+
 				}
 			}
 			if(isServer)

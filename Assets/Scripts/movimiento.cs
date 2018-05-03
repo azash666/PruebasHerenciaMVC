@@ -19,13 +19,14 @@ public class movimiento : NetworkBehaviour
 
 	public GameObject bala;
 	public GameObject huecoBala;
-
+	private float fuerza;
+	public float fuerzaAngular;
 	[SyncVar]
 	private float rotacionVertical;
 
 	private float velocidadAngular;
 
-	[SyncVar/*(hook = "cambiar")*/]
+	[SyncVar]
 	public float rotacion;
 
 
@@ -33,6 +34,8 @@ public class movimiento : NetworkBehaviour
 
 	void Start()
 	{
+		Cursor.visible = false;
+		fuerza = 10000f;
 		if(isLocalPlayer)
 			Instantiate (camara, huecoCamara.transform.position, huecoCamara.transform.rotation).transform.parent=huecoCamara.transform;
 		tiempodisparo = 0;
@@ -52,13 +55,13 @@ public class movimiento : NetworkBehaviour
 			huecoBala.transform.rotation = Quaternion.Euler (rotacionVertical, auxy, 0);
 		}
 		else {
-			var x = Input.GetAxis ("Horizontal") * Time.deltaTime * 60.0f;
-			var z = Input.GetAxis ("Vertical") * 50f;
+			var x = Input.GetAxis ("Horizontal") * Time.deltaTime * fuerzaAngular;
+			var z = Input.GetAxis ("Vertical") *Time.deltaTime * fuerza;
 			var rotacionTorreta = Input.GetAxis ("Mouse X") * Time.deltaTime * 60f;
 			float aux = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
 			float aux2 = huecoCamara.transform.rotation.eulerAngles.x;
 			float auxy = huecoCamara.transform.rotation.eulerAngles.y;
-			Debug.Log (aux2);
+		
 			if (aux2 < 340f && aux2 >= 180f) {
 				rotacionVertical = 0;
 				huecoCamara.transform.rotation = Quaternion.Euler (340f, auxy, 0);
@@ -78,7 +81,8 @@ public class movimiento : NetworkBehaviour
 			}
 			float inclinacionBalas = huecoBala.transform.rotation.eulerAngles.x;
 			CmdCambiarVertical (inclinacionBalas);
-			transform.Rotate (0, x, 0);
+			rb.AddTorque (0, x, 0);
+			//transform.Rotate (0, x, 0);
 			torreta.transform.Rotate (0, rotacionTorreta, 0);
 			rotacion = torreta.transform.rotation.eulerAngles.y;
 			CmdCambiar(rotacion);
