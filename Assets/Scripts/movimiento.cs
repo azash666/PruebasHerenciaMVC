@@ -79,7 +79,6 @@ public class movimiento : NetworkBehaviour
 			}
 			float inclinacionBalas = huecoBala.transform.rotation.eulerAngles.x;
 			CmdCambiarVertical (inclinacionBalas);
-			Debug.Log (x);
 			//rb.AddTorque (0, x, 0);
 			transform.Rotate (0, x, 0);
 			torreta.transform.Rotate (0, rotacionTorreta, 0);

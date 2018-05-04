@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\detecta.cs" />
+     <Compile Include="Assets\IADisparo.cs" />
      <Compile Include="Assets\Paquetes descargados\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
      <Compile Include="Assets\Paquetes descargados\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
      <Compile Include="Assets\Paquetes descargados\GE Common Assets\GE Toggle Full Screen\Scripts\GE_ToggleFullScreenUI.cs" />
@@ -105,6 +106,7 @@
      <Compile Include="Assets\Scripts\Generacion.cs" />
      <Compile Include="Assets\Scripts\hit.cs" />
      <Compile Include="Assets\Scripts\IAMovimiento.cs" />
+     <Compile Include="Assets\Scripts\IAMovimientoTopo.cs" />
      <Compile Include="Assets\Scripts\movimiento.cs" />
      <Compile Include="Assets\Scripts\puntuacion.cs" />
      <Compile Include="Assets\Scripts\vida.cs" />

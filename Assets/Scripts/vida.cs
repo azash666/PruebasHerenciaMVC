@@ -92,7 +92,22 @@ public class vida : NetworkBehaviour
 	}
 
 	public void respawn(){
-		RpcRespawn ();
+		if (isLocalPlayer) {
+			RpcRespawn ();
+		} else {
+			if (isServer) {
+				Vector3 PInicial = Vector3.zero;
+				Quaternion RInicial = Quaternion.Euler (0, 0, 0);
+				spawns = FindObjectsOfType<NetworkStartPosition> ();
+				if (spawns != null && spawns.Length > 0) {
+					int value = Random.Range (0, spawns.Length);
+					PInicial = spawns [value].transform.position;
+					RInicial = spawns [value].transform.rotation;
+				}
+				transform.position = PInicial;
+				transform.rotation = RInicial;
+			}
+		}
 		vidaActual = vidaMaxima;
 	}
 

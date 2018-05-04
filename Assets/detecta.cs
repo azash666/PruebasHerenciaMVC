@@ -11,8 +11,9 @@ public class detecta : MonoBehaviour {
 		cosas = 0;
 	}
 	void Update () {
-		if (cosas == 0) {
+		if (cosas <= 0) {
 			toca = false;
+			cosas = 0;
 		} else {
 			toca = true;
 		}
@@ -25,7 +26,7 @@ public class detecta : MonoBehaviour {
 	}
 	void OnTriggerExit(Collider colision){
 		GameObject hit = colision.gameObject;
-		if (hit != propietario) {
+		if (hit != propietario && hit.tag!="Bala") {
 			cosas--;
 		}
 	}

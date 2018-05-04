@@ -8,7 +8,7 @@ public class hit : NetworkBehaviour {
 	void OnCollisionEnter(Collision colision){
 		GameObject hit = colision.gameObject;
 		if (hit != creador) {
-			if (hit.tag == "Player") {
+			if (hit.tag == "Player" || hit.tag == "CPUTank") {
 				var vida = hit.GetComponent<vida> ();
 				if (vida != null) {
 					vida.golpeador = creador;
@@ -17,7 +17,7 @@ public class hit : NetworkBehaviour {
 
 				}
 			}
-			if(isServer)
+			//if(isServer)
 				Destroy (gameObject);
 		}
 	}
