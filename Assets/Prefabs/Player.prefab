@@ -100,6 +100,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4589776585371958}
+  - component: {fileID: 65388163147002376}
   m_Layer: 0
   m_Name: TankRenderers
   m_TagString: Untagged
@@ -116,7 +117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4191233606933136}
   - component: {fileID: 114524513681313474}
-  - component: {fileID: 65120493225796508}
   - component: {fileID: 54384255487502636}
   - component: {fileID: 114032649916155416}
   - component: {fileID: 114876820191157502}
@@ -158,8 +158,8 @@ Transform:
   m_LocalPosition: {x: 0.000010554959, y: 1.0796412, z: -0.025321364}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4559684375385084}
   - {fileID: 4467858981067042}
+  - {fileID: 4559684375385084}
   m_Father: {fileID: 4589776585371958}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -214,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4132046757844016}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -1.34, y: 0, z: 0}
 --- !u!4 &4559684375385084
 Transform:
@@ -222,12 +222,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1589125022709890}
-  m_LocalRotation: {x: 0.067405805, y: 0, z: 0, w: 0.99772567}
-  m_LocalPosition: {x: -0.000010554959, y: 1.33, z: -3.56}
+  m_LocalRotation: {x: 0.067405805, y: -0, z: -0, w: 0.99772567}
+  m_LocalPosition: {x: -0.000010554959, y: 1.3299979, z: -3.5600004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4132046757844016}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 7.73, y: 0, z: 0}
 --- !u!4 &4589776585371958
 Transform:
@@ -441,14 +441,14 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65120493225796508
+--- !u!65 &65388163147002376
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1899170160058200}
+  m_GameObject: {fileID: 1826900714932364}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
