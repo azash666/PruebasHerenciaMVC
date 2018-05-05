@@ -35,7 +35,7 @@ public class vida : NetworkBehaviour
 	void OnCollisionEnter(Collision colision){
 		GameObject hit = colision.gameObject;
 		if(isServer)
-			if (hit.tag == "Player") {
+		if (hit.tag == "Player" || hit.tag == "CPUTank") {
 				var vidaa = hit.GetComponent<vida> ();
 				if (vidaa != null && velocidad >= 3f && !hitt) {
 				vidaa.golpeador = gameObject;
@@ -44,7 +44,7 @@ public class vida : NetworkBehaviour
 					anterior = Time.time;
 				}
 			}else{
-				if (/*rb.velocity.magnitude >= 4f && */hit.tag != "Suelo" && hit.tag != "Bala" && !hitt) {
+				if (hit.tag != "Suelo" && hit.tag != "Bala" && hit.tag != "CPUTank" && !hitt) {
 					int valor = (int) (velocidad-2)*5;
 					hitt = true;
 					anterior = Time.time;

@@ -7,6 +7,7 @@ public class Generacion : NetworkBehaviour {
 	public GameObject[] terreno;
 	public GameObject[] valla;
 	public GameObject[] players;
+	public GameObject IA;
 	private float tiempo;
 	private int[] tipo;
 	private int[] rotacion;
@@ -40,6 +41,12 @@ public class Generacion : NetworkBehaviour {
 			                    ), Quaternion.identity);
 			objeto.transform.Rotate (0f, Random.Range(0, 8) * 45f, 0f);
 			todo[i+9] = objeto;
+			NetworkServer.Spawn (objeto);
+		}
+		NetworkStartPosition [] spawns = FindObjectsOfType<NetworkStartPosition> ();
+		for (int i = 0; i < 4; i++) {
+			int num = Random.Range (0, spawns.Length);
+			GameObject objeto = (GameObject)Instantiate (IA, spawns [num].transform.position, spawns [num].transform.rotation);
 			NetworkServer.Spawn (objeto);
 		}
 	}

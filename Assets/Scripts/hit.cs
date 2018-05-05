@@ -14,7 +14,6 @@ public class hit : NetworkBehaviour {
 					vida.golpeador = creador;
 					vida.recibirDanno (20);
 					creador.GetComponent<puntuacion> ().sumapuntos (2);
-
 				}
 			}
 			//if(isServer)
