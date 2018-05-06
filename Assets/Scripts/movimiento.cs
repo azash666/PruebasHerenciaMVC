@@ -55,7 +55,7 @@ public class movimiento : NetworkBehaviour
 		}
 		else {
 			var x = Input.GetAxis ("Horizontal") * Time.deltaTime *60f;
-			var z = Input.GetAxis ("Vertical") *Time.deltaTime * fuerza;
+			var z = Input.GetAxis ("Vertical") *Time.deltaTime * fuerza*20f;
 			var rotacionTorreta = Input.GetAxis ("Mouse X") * Time.deltaTime * 60f;
 			float aux = -Input.GetAxis ("Mouse Y") * Time.deltaTime * 50f;
 			float aux2 = huecoCamara.transform.rotation.eulerAngles.x;

@@ -218,3 +218,5 @@ a8796ecdc9d5c260bbe32f30c4b10708 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 d075aeadcc48299d994a802c8feef12b Assembly-CSharp.dll:.IAMovimientoTopo
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.FPSCounter
 0f3d4bb7128a287827d041c696039525 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.AutoMobileShaderSwitch
+ec8ad7b7725a9e1ef5dd8bde8072db67 Assembly-CSharp.dll:.detectaRueda
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.equilibrio

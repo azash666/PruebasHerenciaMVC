@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\equilibrio.cs" />
      <Compile Include="Assets\Paquetes descargados\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
      <Compile Include="Assets\Paquetes descargados\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
      <Compile Include="Assets\Paquetes descargados\GE Common Assets\GE Toggle Full Screen\Scripts\GE_ToggleFullScreenUI.cs" />
@@ -101,6 +102,7 @@
      <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
      <Compile Include="Assets\Scripts\detecta.cs" />
+     <Compile Include="Assets\Scripts\detectaRueda.cs" />
      <Compile Include="Assets\Scripts\disparo.cs" />
      <Compile Include="Assets\Scripts\Generacion.cs" />
      <Compile Include="Assets\Scripts\hit.cs" />
