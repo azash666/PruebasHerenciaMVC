@@ -87,14 +87,12 @@ public class IAMovimiento : NetworkBehaviour {
 
 		if ((!DB.toca && izquierda) || (DA.toca && DC.toca && !derecha) || (DA.toca&&!DB.toca) || (!izquierda && DA.toca && DC.toca)) {
 			transform.Rotate (0, -80f*Time.deltaTime, 0);
-			Debug.Log("Izda");
 		}
 	}
 
 	void dcha(){
 		if ((DA.toca && DB.toca && !DC.toca )||( derecha && DB.toca && !DC.toca )||( derecha && !DB.toca && !DC.toca)) {
 			transform.Rotate (0, 80f*Time.deltaTime, 0);
-			Debug.Log("Dcha");
 		}
 	}
 }
